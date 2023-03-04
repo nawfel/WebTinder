@@ -1,0 +1,3 @@
+{
+    "omnisharp.projectFilesExcludePattern": "**,**/.git/**,**/bower_components/**"
+}

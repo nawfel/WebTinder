@@ -9,10 +9,11 @@
 *.user
 *.userosscache
 *.sln.docstates
+*/.vscode
 
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
-*.db
+/API/*.db/
 *.db-shm
 *.db-wal
 # Mono auto generated files

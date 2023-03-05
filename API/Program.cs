@@ -15,6 +15,11 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 builder.Services.AddApplicationServices(builder.Configuration);
 builder.Services.AddIdentityServices(builder.Configuration);
+builder.WebHost.UseKestrel(serverOptions =>
+{
+    serverOptions.ListenAnyIP(5000);
+    serverOptions.ListenAnyIP(5001, listenOptions => listenOptions.UseHttps());
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.Security.Claims;
 
 namespace API.Controllers
 {
@@ -35,6 +36,18 @@ namespace API.Controllers
         {
            return await userRepository.GetMemberAsync(username);            
            
+        }
+
+        [HttpPut]
+        public async Task<ActionResult> UpdateUser(MemberUpdateDto memberUpdateDto)
+        {
+            var username = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            var user = await userRepository.GetUserByNameAsync(username);
+            if (user == null) { return NotFound(); }
+            mapper.Map(memberUpdateDto, user);
+            if (await userRepository.SaveAllAsync()) return NoContent();
+            return BadRequest("failed to update user");
         }
     }
 }

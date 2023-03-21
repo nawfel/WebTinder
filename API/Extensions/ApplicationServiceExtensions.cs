@@ -1,4 +1,5 @@
-﻿using API.Data;
+﻿using API._Repository;
+using API.Data;
 using API.Helpers;
 using API.Interfaces;
 using API.Repository;
@@ -22,6 +23,8 @@ namespace API.Extensions
             services.Configure<CloudinarySettings>(config.GetSection("CloudinarySettings"));
             services.AddScoped<IPhotoService, PhotoService>();
             services.AddScoped<LogUserActivity>();
+            services.AddScoped<ILikesRepository,LikesRepository>();
+            services.AddScoped<IMessageRespository, MessageRepository>();
             return services;
         }
     }
